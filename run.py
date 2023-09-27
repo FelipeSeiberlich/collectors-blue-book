@@ -55,20 +55,36 @@ smurfette = """
                                                                     .//(/....,..,,,*.........    The right place for Smurfs lovers!!!
 """
 print(smurfette)
-print('This program is designed to be a contact book.')
-print('Enjoy one of the following options bellow\n')
+print('This program is a contact book.')
+print('Select one of the following options bellow and be connected.\n')
 
-
+contact = {}
 
 def display_contact():
-    """
-    Provide a contact book menu for the user.
-    """
-    print("Name\t\t Contact Number")
+    print("==========================================")
+    print("|Name            | Number           |")
+    print("==========================================")
     for key in contact:
+        # format to left-align and give some spacing
         print("{}\t\t{}". format(key, contact.get(key)))
+    print("==========================================")
+
 while True:
     choice = int(input(" 1. Add new contact\n 2. Search contact\n 3. Display contact\n 4. Edit contact\n 5. Delete contact\n 6. Exit\n \nEnter your choice: "))
+    if choice == 1:
+        print('Option 1 selected')
+        name = input("\nEnter the contact name: ")
+        phone = input("Enter the mobile number: ")
+        contact[name] = phone
+        display_contact()
+
+
+
+
+    
+
+    
+
                                                                                                                                                                            
   
                                                                                                                                                                            
