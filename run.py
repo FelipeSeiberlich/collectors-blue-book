@@ -9,6 +9,10 @@ CREDS = Credentials.from_service_account_file('creds.json')
 SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('blue_book')
+ALLOWED_CHARACTERS=['a','b','c','d','e','f','g','h','i','j',
+        'k','l','m','n','o','p','q','r','s','t','u','v','w','x','y',
+        'z','A','B','C','D','E','F','G','H','I','J','K','L','M','N',
+        'O','P','Q','R','S','T','U','V','W','X','Y','Z',' ']
 
 contact = {}
 panel = """
@@ -23,41 +27,32 @@ panel = """
 print(panel)
 print('*********************************************     Welcome to the Smurfs collectors Contact Book     ****************************************************')
 smurfette = """
-                                                *//**#///**(////*   /,                           
-                                                    **//*(***#/***/****(*******                       
-                                                        *******/****************//*//////               
-                                                        ./*///*****////*/****/******/**////**          
-                                                            ,*////****///((***//********/****,        
-                                                                *(((//*************************//      
-                                                                    .///////**/***************/*      
-                                                                    //(##(    *((((///%#////(/        
-                                                                    //(#(         ,,                  
-                                                                    /((((      ,.,,,..                
-                                                                    /(((/     ...........             
-                                                                    /(((/     ....... ....            
-                                                                    ,((((    .....,,****,,,           
-                                                                     ((#(   .,,,,,,,*******,,         
-                                                                     /(((   ,/**///%%%&@%##*/*        
-                                                                      ((((  (#((@......   %///,       
-                                                                      /((( *#(///  @@.@&..#//(*,,     
-                                                                       /((((#%(///(((((/##(((#(*,,,   
-                                                                       /((#((########%%%@####(((/*,,  
-                                                                       /(((%%%%&&&/%%%%,%#(#(///***,  
-                                                                      (#(((#(((#%&/,,,...###/(///**.  
-                                                                      /#(#(/#(/(#(/,,....,*###//      
-                                                                    ./((/    ./,,......*/,####(/*  
-                                                                    /((/  ..,,,......,*//,,(#(%##*
-                                                                    /((,   /*........,,,,,.       
-                                                                    /#(       #%%/..,##           
-                                                                    ./((       #%%(, ###(          
-                                                                    //(/    (##%%%%//((#(//.       
-                                                                    *//((    ######%*(((#(((/.       
-                                                                    .//(/....,..,,,*.........    The right place for Smurfs lovers!!!
+/(**(**(**///**              
+  */******/*/**/***//         
+     *///**//***/********     
+          /////***********.   
+          /(#        #(,      
+          (#(   ,,,..         
+          ((/   ,.,. ..         Hi! I am Smurfette. Nice to meet you.
+          /((  ..,,***,,      
+           ((  /*/%%&@#%/       I will give you some tips in how to use this program...
+           /( /(/  *.& (//,   
+           .((#&(((##(##%(/,, 
+            ((%%%&/%%,%((//** 
+           /((%((#/,..,##/*   
+            (#   *,...,/,,##((
+            /#  ,*.....,,,    
+            /(    #%  #(      
+           *((  ##%%(###(.    
+          .*(....,/......     1
 """
 print(smurfette)
 print('This program is a contact book.')
 print('It was created to connect with other smurf collectors.\n')
 print('Please enter your contact details in order to participate in the network.\n')
+print('You can entry as many contacts as you want.\n')
+print('If you want to search for one of your entries and forgot your contact full name, no panic!.\n')
+print('Select the option 3 to display all your entries.\n')
 
 contact = {}
 
@@ -81,7 +76,7 @@ while True:
         print(f'The data provided is {name}')
         print(' ')
         
-        print('Please enter your phone number bellow only using numbers.')
+        print('Please enter your phone number below only using numbers.')
         print('Example: 00 353 892516666\n')
         phone = input("Enter the mobile number: ")
         print(f'The data provided is {phone}')
@@ -96,13 +91,10 @@ while True:
         if validate_data == 'y' or validate_data == 'Y':
             print(' ')
             print('Validating...')
-        allowed_characters=['a','b','c','d','e','f','g','h','i','j',
-        'k','l','m','n','o','p','q','r','s','t','u','v','w','x','y',
-        'z','A','B','C','D','E','F','G','H','I','J','K','L','M','N',
-        'O','P','Q','R','S','T','U','V','W','X','Y','Z',' ']
-        if any(x not in allowed_characters for x in name):
+        if any(x not in ALLOWED_CHARACTERS for x in name):
             print(' ')
             print("error: invalid character\n")
+            print('Please go back to the menu, select the option 5 to delete the wrong entry.\n')
         else:
             print(' ')
             print('Contact was validated!\n')
@@ -127,22 +119,23 @@ while True:
             print(' ')
             print(search_name, "'s contact number is", contact[search_name])
             print(' ')
-            print('Please select one of the options bellow to continue or type 6 to exit the program.')
+            print('Please select one of the options below to continue or type 6 to exit the program.')
             print(' ')
         else:
             print(' ')
             print("Sorry :( This name is not present in this contact book.\n")
-            print('You can try a new search or select one of the other options bellow :)\n')
-
+            print('For safety reasons, you should entry the full name to access users phone number\n')
+            print('You can try a new search or select one of the other options below :)\n')
+            
     elif choice == 3:
         print('Option 3 selected!\n')
         if not contact:
             print(' ')
             print("Empty contact book. :(")
-            print('Please add a contact selecting the option 1 bellow')
+            print('Please add a contact selecting the option 1 below')
             print(' ')
         else:
-            print('Check the contacts of the Smurfs lovers bellow:')
+            print('Check the contacts of the Smurfs lovers below:')
             print(' ')
             display_contact()
             print(' ')
