@@ -56,7 +56,8 @@ smurfette = """
 """
 print(smurfette)
 print('This program is a contact book.')
-print('Select one of the following options bellow and be connected.\n')
+print('It was created to connect with other smurf collectors.\n')
+print('Please enter your contact details in order to participate in the network.\n')
 
 contact = {}
 
@@ -91,16 +92,31 @@ while True:
         contact[name] = phone 
         display_contact()
         print(' ')
+        validate_data = input('Are you sure that data entered is correct y/n?')
+        if validate_data == 'y' or validate_data == 'Y':
+            print(' ')
+            print('Validating...')
+        allowed_characters=['a','b','c','d','e','f','g','h','i','j',
+        'k','l','m','n','o','p','q','r','s','t','u','v','w','x','y',
+        'z','A','B','C','D','E','F','G','H','I','J','K','L','M','N',
+        'O','P','Q','R','S','T','U','V','W','X','Y','Z',' ']
+        if any(x not in allowed_characters for x in name):
+            print(' ')
+            print("error: invalid character\n")
+        else:
+            print(' ')
+            print('Contact was validated!\n')
+
         back_menu = input('Would you like to return to the menu y/n?')
         if back_menu == 'y' or back_menu == 'Y':
             print(' ')
             print('Your last entry was:')
             display_contact()
             print(' ')
-            print('Please select one of the following options')
+            print('Please select one of the following options:\n')
         else:
             print(' ')
-            print('Thanks for using The Blue Contact Book')
+            print('Thanks for using The Blue Contact Book.')
             print('See you soon!')
             break
         
@@ -126,26 +142,29 @@ while True:
             print('Please add a contact selecting the option 1 bellow')
             print(' ')
         else:
-            Contact of the Smurfs lovers bellow:
+            print('Check the contacts of the Smurfs lovers bellow:')
             print(' ')
             display_contact()
             print(' ')
             print('Please select one of the options bellow to continue or type 6 to exit the program.')
             print(' ')
     elif choice == 4:
+        print('Option 4 selected!\n')
         edit_contact = input("Enter the contact to be edited: ")
         if edit_contact in contact:
             phone = input("Enter new phone number: ")
             contact[edit_contact] = phone
             print(' ')
-            print("Contact updated")
+            print("Contact updated bellow:")
             print(' ')
             display_contact( )
             print(' ')
-            print('Please select one of the options bellow to continue or type 6 to exit the program.')
+            print('Please select one of the options bellow to continue or type 6 to exit the program.\n')
         else:
             print("Name is not found in contact book")
+            print('Please select one of the options bellow to continue or type 6 to exit the program.\n')
     elif choice == 5:
+        print('Option 5 selected!\n')
         del_contact = input("Enter the contact to be deleted: ")
         if del_contact in contact:
             print(' ')
@@ -153,6 +172,7 @@ while True:
             if confirm == 'y' or confirm == 'Y':
                 contact.pop(del_contact)
                 print('')
+                print('This contact was successfully deleted.\n')
             display_contact( )
             print(' ')
             print('Please select one of the options bellow to continue or type 6 to exit the program.')
@@ -163,6 +183,9 @@ while True:
             print('Please select one of the options bellow to continue or type 6 to exit the program.')
             print(' ')
     else:
+        print(' ')
+        print('Thanks for using the Blue Contact Book Program.')
+        print('See you soon! :)')
         break
     
 
