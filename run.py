@@ -12,7 +12,7 @@ SHEET = GSPREAD_CLIENT.open('blue_book')
 
 contact = {}
 panel = """
-### ##   ####     ##  ###  ### ###            ## ##    ## ##   ###  ##  #### ##    ##      ## ##   #### ##           ### ##    ## ##    ## ##   ##  ###  
+### ##   ####     ##  ###  ### ###            ## ##    ## ##   ###  ##  #### ##     ##     ## ##   #### ##           ### ##    ## ##    ## ##   ##  ###  
  ##  ##   ##      ##   ##   ##  ##           ##   ##  ##   ##    ## ##  # ## ##     ##    ##   ##  # ## ##            ##  ##  ##   ##  ##   ##  ##  ##   
  ##  ##   ##      ##   ##   ##               ##       ##   ##   # ## #    ##      ## ##   ##         ##               ##  ##  ##   ##  ##   ##  ## ##    
  ## ##    ##      ##   ##   ## ##            ##       ##   ##   ## ##     ##      ##  ##  ##         ##               ## ##   ##   ##  ##   ##  ## ##    
@@ -77,11 +77,13 @@ while True:
         print('Example: Philip Grant')
 
         name = input("\nEnter the contact name: ")
+        print(f'The data provided is {name}')
         print(' ')
         
         print('Please enter your phone number bellow only using numbers.')
         print('Example: 00 353 892516666\n')
         phone = input("Enter the mobile number: ")
+        print(f'The data provided is {phone}')
         print(' ')
         print('Please double check your data...')
         print(' ')
@@ -89,43 +91,77 @@ while True:
         contact[name] = phone 
         display_contact()
         print(' ')
-        print('What would you like to do now?')
-        print(' ')
-
+        back_menu = input('Would you like to return to the menu y/n?')
+        if back_menu == 'y' or back_menu == 'Y':
+            print(' ')
+            print('Your last entry was:')
+            display_contact()
+            print(' ')
+            print('Please select one of the following options')
+        else:
+            print(' ')
+            print('Thanks for using The Blue Contact Book')
+            print('See you soon!')
+            break
+        
     elif choice == 2:
+        print('Option 2 selected!\n')
         search_name = input("Enter the contact name: ")
         if search_name in contact:
+            print(' ')
             print(search_name, "'s contact number is", contact[search_name])
+            print(' ')
+            print('Please select one of the options bellow to continue or type 6 to exit the program.')
+            print(' ')
         else:
             print(' ')
             print("Sorry :( This name is not present in this contact book.\n")
             print('You can try a new search or select one of the other options bellow :)\n')
 
     elif choice == 3:
+        print('Option 3 selected!\n')
         if not contact:
-            print("Empty contact book")
+            print(' ')
+            print("Empty contact book. :(")
+            print('Please add a contact selecting the option 1 bellow')
+            print(' ')
         else:
+            Contact of the Smurfs lovers bellow:
+            print(' ')
             display_contact()
+            print(' ')
+            print('Please select one of the options bellow to continue or type 6 to exit the program.')
             print(' ')
     elif choice == 4:
         edit_contact = input("Enter the contact to be edited: ")
         if edit_contact in contact:
-            phone = input("Enter mobile number")
+            phone = input("Enter new phone number: ")
             contact[edit_contact] = phone
             print(' ')
-            print("contact_updated")
+            print("Contact updated")
+            print(' ')
             display_contact( )
+            print(' ')
+            print('Please select one of the options bellow to continue or type 6 to exit the program.')
         else:
             print("Name is not found in contact book")
     elif choice == 5:
-        del_contact = input("Enter the contact to be deleted")
+        del_contact = input("Enter the contact to be deleted: ")
         if del_contact in contact:
+            print(' ')
             confirm = input("Do you want to delete this contact y/n?")
             if confirm == 'y' or confirm == 'Y':
                 contact.pop(del_contact)
+                print('')
             display_contact( )
+            print(' ')
+            print('Please select one of the options bellow to continue or type 6 to exit the program.')
+            print(' ')
         else:
+            print(' ')
             print("Name is not found in contact book")
+            print('Please select one of the options bellow to continue or type 6 to exit the program.')
+            print(' ')
     else:
         break
     
